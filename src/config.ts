@@ -18,6 +18,7 @@ export const DEFAULT_MODEL = FREE_MODELS[0].id;
 interface Config {
   apiKey?: string;
   model?: string;
+  apiUrl?: string;
 }
 
 export function loadConfig(): Config {
@@ -68,6 +69,25 @@ export function getModel(): string | undefined {
 export function saveModel(model: string): void {
   const config = loadConfig();
   config.model = model;
+  saveConfig(config);
+}
+
+export const DEFAULT_API_URL = "https://openrouter.ai/api/v1/chat/completions";
+
+export function getApiUrl(): string {
+  if (process.env.OPENAI_API_URL) {
+    return process.env.OPENAI_API_URL;
+  }
+  const config = loadConfig();
+  if (config.apiUrl) {
+    return config.apiUrl;
+  }
+  return DEFAULT_API_URL;
+}
+
+export function saveApiUrl(url: string): void {
+  const config = loadConfig();
+  config.apiUrl = url;
   saveConfig(config);
 }
 
