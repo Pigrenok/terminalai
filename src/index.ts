@@ -7,7 +7,7 @@ import {
   promptForApiKey,
   getModel,
   getApiUrl,
-  DEFAULT_API_URL,
+  DEFAULT_API_URL_BASE,
   promptForApiUrl,
   promptForModel,
   saveModel,
@@ -89,14 +89,14 @@ I build free dev tools. Follow for more: https://x.com/eibrahim
 
   // Get API endpoint from env/config; if not openrouter/default and no key → skip key
   let apiUrl = getApiUrl();
-  let isDefaultEndpoint = apiUrl === DEFAULT_API_URL || apiUrl.includes("openrouter");
+  let isDefaultEndpoint = apiUrl === DEFAULT_API_URL_BASE || apiUrl.includes("openrouter");
 
   // Get API key from env or config, prompt if needed
   let apiKey = getApiKey();
   if (!apiKey && isDefaultEndpoint) {
     apiKey = await promptForApiKey();
     apiUrl = await promptForApiUrl();
-    isDefaultEndpoint = apiUrl === DEFAULT_API_URL || apiUrl.includes("openrouter");
+    isDefaultEndpoint = apiUrl === DEFAULT_API_URL_BASE || apiUrl.includes("openrouter");
   } else if (!apiKey) {
     console.log("\nUsing custom endpoint without saved API key.\n");
   }

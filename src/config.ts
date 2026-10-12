@@ -72,7 +72,7 @@ export function saveModel(model: string): void {
   saveConfig(config);
 }
 
-export const DEFAULT_API_URL = "https://openrouter.ai/api/v1/chat/completions";
+export const DEFAULT_API_URL_BASE = "https://openrouter.ai/api/v1";
 
 export function getApiUrl(): string {
   if (process.env.OPENAI_API_URL) {
@@ -82,7 +82,7 @@ export function getApiUrl(): string {
   if (config.apiUrl) {
     return config.apiUrl;
   }
-  return DEFAULT_API_URL;
+  return DEFAULT_API_URL_BASE;
 }
 
 export function saveApiUrl(url: string): void {
@@ -123,7 +123,7 @@ export async function promptForApiKey(): Promise<string | undefined> {
 
 export async function promptForApiUrl(): Promise<string> {
   console.log("\nAPI endpoint (OpenAI-compatible). Default: OpenRouter");
-  console.log(`Press Enter to use default: ${DEFAULT_API_URL}\n`);
+  console.log(`Press Enter to use default: ${DEFAULT_API_URL_BASE}\n`);
   const url = await prompt("Enter API endpoint URL (optional): ");
   if (url.trim()) {
     saveApiUrl(url.trim());
@@ -131,7 +131,7 @@ export async function promptForApiUrl(): Promise<string> {
     return url.trim();
   }
   console.log("\nUsing default endpoint.\n");
-  return DEFAULT_API_URL;
+  return DEFAULT_API_URL_BASE;
 }
 
 export async function promptForModel(): Promise<string> {
