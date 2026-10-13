@@ -106,10 +106,10 @@ function prompt(question: string): Promise<string> {
 }
 
 export async function promptForApiKey(): Promise<string | undefined> {
-  console.log("\nNo API key found. You need a free OpenRouter API key to use terminalai.");
+  console.log("\nNo API key found. You can get a free OpenRouter API key to use terminalai.");
   console.log("Get one at: https://openrouter.ai/keys (takes 30 seconds)\n");
 
-  const apiKey = await prompt("Enter your OpenRouter API key (leave blank to skip): ");
+  const apiKey = await prompt("Enter your API key (leave blank to skip): ");
 
   if (apiKey.trim()) {
     saveApiKey(apiKey.trim());
